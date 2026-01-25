@@ -1,5 +1,6 @@
 package com.devsuperior.dscommerce.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,13 @@ public class ProductService {
 	//	ProductDTO dto = new ProductDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getImgUrl());
 		return new ProductDTO(product);
 	//	return dto;
+	} 
+	
+	@Transactional(readOnly = true)
+	public List<ProductDTO> findAll () {
+		List<Product> result = repository.findAll();
+	//	List<ProductDTO> dto = result.stream().map(x -> new ProductDTO(x)).toList();
+	//	return dto;
+		return result.stream().map(x -> new ProductDTO(x)).toList();
 	} 
 }
