@@ -1,8 +1,9 @@
 package com.devsuperior.desafio2.entities;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +26,7 @@ public class Participante {
 	private String email;
 	
 	@ManyToMany(mappedBy = "participantes")
-	private List<Atividade> atividades = new ArrayList<>();
+	private Set<Atividade> atividades = new HashSet<>();
 	
 	public Participante() {
 		super();
@@ -67,7 +68,7 @@ public class Participante {
 		return Objects.hash(id);
 	}
 	
-	public List<Atividade> getAtividades() {
+	public Set<Atividade> getAtividades() {
 		return atividades;
 	}
 
