@@ -7,6 +7,7 @@ import com.devupserior.para_muitos.dto.CategoryDTO;
 import com.devupserior.para_muitos.dto.ProductDTO;
 import com.devupserior.para_muitos.entities.Category;
 import com.devupserior.para_muitos.entities.Product;
+import com.devupserior.para_muitos.repositories.CategoryRepository;
 import com.devupserior.para_muitos.repositories.ProductRepository;
 
 @Service
@@ -15,13 +16,17 @@ public class ProductService {
 	@Autowired
 	private ProductRepository repository;
 	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
 	public ProductDTO insert(ProductDTO dto) {
 		Product entity = new Product();
 		entity.setName(dto.getName());
 		entity.setPrice(dto.getPrice());
 		for (CategoryDTO catDto : dto.getCategories()) {
-			Category cat = new Category();
-			cat.setId(catDto.getId());
+			Category cat = categoryRepository.getReferenceById(catDto.getId());
+			//Category cat = new Category();
+			//cat.setId(catDto.getId());
 			entity.getCategories().add(cat);
 		}
 		entity = repository.save(entity);
