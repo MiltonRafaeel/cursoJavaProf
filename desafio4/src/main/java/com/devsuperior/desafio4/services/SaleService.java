@@ -30,8 +30,20 @@ public class SaleService {
 	
 	public Page<SaleMinDTO> getReport(String minDate, String maxDate, String name, Pageable pageable) {
 		LocalDate today = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
-		LocalDate max = (maxDate == null || maxDate.equals("")) ? today : LocalDate.parse(maxDate);
-		LocalDate min = (minDate == null || minDate.equals("")) ? max.minusYears(1L) : LocalDate.parse(minDate);
+		LocalDate min;
+		LocalDate max;
+		if (maxDate == null || maxDate.equals("")) {
+			max = today;
+		}
+		else {
+			max = LocalDate.parse(maxDate);
+		}
+		if (minDate == null || minDate.equals("")) {
+			min = max.minusYears(1L);
+		} 
+		else {
+			min = LocalDate.parse(minDate);
+		}
 		return repository.searchReport(min, max, name, pageable);
 	}
 	
