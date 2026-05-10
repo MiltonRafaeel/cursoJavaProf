@@ -1,0 +1,15 @@
+# Pasta do Eclipse/STS
+.metadata/
+.settings/
+.project
+.classpath
+
+# Pasta de compilação do Maven
+target/
+
+# Arquivos de log
+*.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
